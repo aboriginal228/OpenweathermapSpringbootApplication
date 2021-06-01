@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<body>
+
+<form method="post" th:action="@{/selectCity}" th:object="${city}">
+
+    Select city:
+  <label>
+    <select th:field="*{latAndLon}">
+      <option value=""> -- </option>
+      <option th:each="entry : ${city.cityList}"
+              th:value="${entry.key}"
+              th:utext="${entry.value}">
+      </option>
+    </select>
+  </label>
+  <label >
+    metric
+    <input type="radio" th:field="${city.measurement}" th:value="metric" >
+    imperial
+    <input type="radio" th:field="${city.measurement}" th:value="imperial">
+  </label>
+
+  <input type="submit" value="Submit" />
+
+</form>
+
+<p th:text="'Temperature: ' + ${city.current.temp} + ' °'"/>
+<p th:text="'Probability of precipitation: ' + ${city.hourly.get(0).intPop} + ' %'"/>
+<p th:text="'Wind: '+ ${city.current.wind_speed} + ' metre/sec, ' + ${city.windDirection}"/>
+<p th:text="'Pressure: ' + ${city.current.pressure} + ' hPa'"/>
+<p th:text="'Humidity: ' + ${city.current.humidity} + ' %'"/>
+
+</body>
+</html>
