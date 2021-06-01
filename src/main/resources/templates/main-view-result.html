@@ -7,7 +7,6 @@
     Select city:
   <label>
     <select th:field="*{latAndLon}">
-      <option value=""> -- </option>
       <option th:each="entry : ${city.cityList}"
               th:value="${entry.key}"
               th:utext="${entry.value}">
